@@ -1,0 +1,25 @@
+name: aws-ubuntu-advantage
+version: '0.1' # just for humans, typically '1.2+git' or '1.3.2'
+summary: Set up an AWS Account for Ubuntu Advantage
+description: |
+  A simple utility that configures your AWS account to enable access to Ubuntu
+  Advantage support.
+
+  This script sets up the necessary access permissions on your AWS account, so
+  that our support services can authenticate you as an Ubuntu Advantage customer.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+apps:
+  aws-ubuntu-advantage:
+    command: bin/aws-ubuntu-advantage
+    plugs: [network, network-bind]
+
+parts:
+  awsua:
+    plugin: python
+    source: .
+    python-packages:
+    - awscli
+    - boto3
